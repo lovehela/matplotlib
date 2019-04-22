@@ -353,6 +353,7 @@ _JQUERY_ICON_CLASSES = {
     'zoom_to_rect': 'ui-icon ui-icon-search',
     'move': 'ui-icon ui-icon-arrow-4',
     'download': 'ui-icon ui-icon-disk',
+    'edit': 'ui-icon ui-icon-pencil',
     None: None,
 }
 
@@ -364,6 +365,7 @@ class NavigationToolbar2WebAgg(backend_bases.NavigationToolbar2):
                   name_of_method)
                  for text, tooltip_text, image_file, name_of_method
                  in (backend_bases.NavigationToolbar2.toolitems +
+                     (('Edit', 'Edit plot', 'edit', 'edit'),) +
                      (('Download', 'Download plot', 'download', 'download'),))
                  if image_file in _JQUERY_ICON_CLASSES]
 
@@ -393,6 +395,11 @@ class NavigationToolbar2WebAgg(backend_bases.NavigationToolbar2):
     def save_figure(self, *args):
         """Save the current figure"""
         self.canvas.send_event('save')
+
+    def edit(self, *args):
+        """Edit the current figure"""
+        print("Send event!")
+        self.canvas.send_event('edit')
 
 
 class FigureManagerWebAgg(backend_bases.FigureManagerBase):
